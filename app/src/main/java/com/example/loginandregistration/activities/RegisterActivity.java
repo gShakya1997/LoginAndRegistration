@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initialize();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         firebaseAuth = FirebaseAuth.getInstance();
         actionButtons();
     }
@@ -46,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validateStoreName() | !validateStoreEmail() | !validateStorePassword() | !validateStoreConfirmPassword()){
+                if (!validateStoreName() | !validateStoreEmail() | !validateStorePassword() | !validateStoreConfirmPassword()) {
                     return;
                 }
                 firebaseAuth.createUserWithEmailAndPassword(storeEmail, storePassword)
@@ -110,10 +112,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean validateStoreConfirmPassword() {
         storeCPassword = etStoreCPassword.getEditText().getText().toString().trim();
-        if (validation.validateConfirmPassword(storePassword,storeCPassword).equals("!Password")){
+        if (validation.validateConfirmPassword(storePassword, storeCPassword).equals("!Password")) {
             etStoreCPassword.setError("Password doesn't match");
             return false;
-        } else if (validation.validateConfirmPassword(storePassword,storeCPassword).equals("required")){
+        } else if (validation.validateConfirmPassword(storePassword, storeCPassword).equals("required")) {
             etStoreCPassword.setError("Required");
             return false;
         } else {
