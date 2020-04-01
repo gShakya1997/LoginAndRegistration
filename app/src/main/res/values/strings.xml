@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Auth</string>
+    <string name="app_name">Delivery Guy</string>
+    <string name="greeting">We serve passion</string>
 </resources>
